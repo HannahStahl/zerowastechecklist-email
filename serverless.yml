@@ -1,17 +1,16 @@
 service: zerowastechecklist-email
 
 custom:
-  secrets: ${file(secrets.json)}
+  secrets: ${file(secrets-${opt:stage, self:provider.stage}.json)}
 
 provider:
   name: aws
   runtime: nodejs8.10
-  stage: ${self:custom.secrets.NODE_ENV}
+  stage: dev
   region: us-east-1
-  environment: 
-    NODE_ENV: ${self:custom.secrets.NODE_ENV}
-    EMAIL: ${self:custom.secrets.EMAIL}
-    DOMAIN: ${self:custom.secrets.DOMAIN}
+  environment:
+    email: hannahstahl14@gmail.com
+    domain: ${self:custom.secrets.domain}
   iamRoleStatements:
     - Effect: "Allow"
       Action:

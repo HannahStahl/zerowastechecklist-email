@@ -1,7 +1,7 @@
 const aws = require('aws-sdk')
 const ses = new aws.SES()
-const myEmail = process.env.EMAIL
-const myDomain = process.env.DOMAIN
+const myEmail = process.env.email
+const myDomain = process.env.domain
 
 function generateResponse (code, payload) {
   return {
@@ -16,7 +16,6 @@ function generateResponse (code, payload) {
 }
 
 function generateError (code, err) {
-  console.log(err)
   return {
     statusCode: code,
     headers: {
@@ -30,7 +29,6 @@ function generateError (code, err) {
 
 function generateEmailParams (body) {
   const { email, name, message } = JSON.parse(body)
-  console.log(email, name, message)
   if (!(email && name && message)) {
     throw new Error('Missing parameters! Make sure to add parameters \'email\', \'name\', \'message\'.')
   }
@@ -42,7 +40,7 @@ function generateEmailParams (body) {
       Body: {
         Text: {
           Charset: 'UTF-8',
-          Data: `Message from ${name}:\n${message}`
+          Data: `<b>${name} says:</b>\n\n${message}`
         }
       },
       Subject: {
