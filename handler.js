@@ -40,7 +40,7 @@ function generateEmailParams (body) {
       Body: {
         Text: {
           Charset: 'UTF-8',
-          Data: `<b>${name} says:</b>\n\n${message}`
+          Data: `${name} says:\n\n"${message}"\n\nYou can reply directly to this email.`
         }
       },
       Subject: {
